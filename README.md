@@ -1,13 +1,13 @@
 # Kraken 0.1
 
-Kraken is a PowerShell Module which collects useful sql server metadata information for auditing and reporting purposes. It executes a series of lightweight, non intrusive sql server queries and stores the information in your repository database. It is backward compatible down to SQL Server 2008 R2. Information collected includes:
+Kraken is a PowerShell Module which collects useful sql server metadata information for auditing and reporting purposes. It executes a series of lightweight, non-intrusive sql server queries and stores the information in your repository database. It is backward compatible down to SQL Server 2008 R2. Information collected includes:
 
   - Availability Groups, Replicas and Listener information
   - Availability Group Databases
   - Backups (Latest Backup per database and per type)
   - Database File (size and growth setting information)
   - Database Size
-  - Hadr Clusters, members and networks
+  - HADR Clusters, members and networks
   - OS Info
   - SQL Logins
   - Server Properties
@@ -47,7 +47,7 @@ Run the following cmdlet to set these values
 ```sh
  Set-DBSettings
 ```
-- credentials: enter the sql login and password previously created on the repository server. It has to be a sql account, trusted authentication is not supported at the moment.
+- credentials: enter the sql login and password previously created on the repository server. It has to be a sql account, trusted authentication is not supported for now.
 - dbserver: sqlservername.fqdn.com\instancename (enter the server name on this format)
 - dbname: Kraken (it could be any name but use Kraken for identification purposes)
 
@@ -70,7 +70,7 @@ If you wan to use a sql account to connect and deploy the schema you can also do
 
 Insert values to the sql_instances table.
 
-- id: identity column, it autopopulates
+- id: identity column, it auto populates
 - instance_name: use the same format as in the example below
 - Environment: could be anything you defined based on your environment, i.e. DEV, TST, STG, QA, PRD
 - Active: A value of 1 is active, a value of 0 is disabled and the process won't run against that target
@@ -97,7 +97,7 @@ GO
 
 ### Release the Kraken!
 
-I wanted to call this cmdlet *Release-TheKraken* but.... "Release" is a PowerShell reserved word so I eneded up using Invoke. Anyway you can run the following command now:
+I wanted to call this cmdlet *Release-TheKraken* but.... "Release" is a PowerShell reserved word so I ended up using Invoke. Anyway you can run the following command now:
 
 ```sh
  Invoke-TheKraken
@@ -111,7 +111,7 @@ This cmdlet can accept different parameters:
 
 ### Future enhancements
 
- - Make the process run in paralell
+ - Make the process run in parallel
  
 
  
