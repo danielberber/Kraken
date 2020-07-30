@@ -85,13 +85,13 @@ Create a login with the same name and password used in your repository database 
 
 ```sh
 use [master]
-GRANT VIEW SERVER STATE TO [<user created on repo database>];
+GRANT VIEW SERVER STATE TO [<same user as in repo database>];
 GO
-GRANT VIEW ANY DEFINITION TO [<user created on repo database>];
+GRANT VIEW ANY DEFINITION TO [<same user as in repo database>];
 GO
-GRANT VIEW ANY DATABASE TO [<user created on repo database>];
+GRANT VIEW ANY DATABASE TO [<same user as in repo database>];
 GO
-GRANT CONNECT ANY DATABASE to [<user created on repo database>];
+GRANT CONNECT ANY DATABASE to [<same user as in repo database>];
 GO 
 ```
 
