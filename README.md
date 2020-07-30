@@ -47,9 +47,9 @@ Run the following cmdlet to set these values
 ```sh
  Set-DBSettings
 ```
-credentials: enter the sql login and password previously created on the repository server. It has to be a sql account, trusted authentication is not supported at the moment.
-dbserver: sqlservername.fqdn.com\instancename (enter the server name on this format)
-dbname: Kraken (it could be any name but use Kraken for identification purposes)
+- credentials: enter the sql login and password previously created on the repository server. It has to be a sql account, trusted authentication is not supported at the moment.
+- dbserver: sqlservername.fqdn.com\instancename (enter the server name on this format)
+- dbname: Kraken (it could be any name but use Kraken for identification purposes)
 
 ### Create the database schema
 
