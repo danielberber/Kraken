@@ -1,0 +1,1 @@
+select id, instance_name, environment, active from dbo.sql_instances where active = 1
