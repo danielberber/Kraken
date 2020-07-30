@@ -25,12 +25,14 @@ The only dependency is on sqlserver. Please install the sql server module prior 
 
 ```sh
 Install-module sqlserver
+Import-module sqlserver
 ```
 
 ### Install Kraken Module
 
 ```sh
- Install-module Kraken
+Install-module Kraken
+Import-module Kraken
 ```
 
 ### Create Database & login
