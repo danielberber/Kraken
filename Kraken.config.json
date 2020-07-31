@@ -5,10 +5,8 @@
                  "version":  "0.1"
              },
     "dbsettings":  {
-                       "server":  "<sql server>\\<named instance>",
-                       "database":  "<database name>",
-                       "username":  "<database user>",
-                       "password":  "<Encrypted password>"
+                       "server":  "<server name>",
+                       "database":  "<database>"
                    },
     "Commands":  {
                      "Get-ServerProperties":  {

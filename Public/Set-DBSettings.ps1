@@ -3,9 +3,6 @@ function Set-DBSettings{
     [CmdletBinding()]
     param
     (
-    [Parameter(Mandatory, ValueFromPipeline)]
-    [System.Management.Automation.Credential()]
-    [PSCredential] $Credential,
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
     [string] $dbserver,
@@ -20,12 +17,7 @@ function Set-DBSettings{
         $json = Get-Content -Path $script:PSConfigPath\Kraken.config.json -Raw | ConvertFrom-Json
     }
 
-    process {
-        $Password = $Credential.Password | ConvertFrom-SecureString
-        $User = $Credential.UserName
-        
-        $json.dbsettings.password = $Password
-        $json.dbsettings.username = $User
+    process {        
         $json.dbsettings.server = $dbserver
         $json.dbsettings.database = $dbname
         $json | ConvertTo-Json -depth 100 | Set-Content $script:PSConfigPath\Kraken.config.json

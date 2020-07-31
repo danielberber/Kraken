@@ -28,14 +28,22 @@ function Write-JobMessage {
         [bool]$Success,
 
         [Parameter(ValueFromPipeline)]
-        [string]$ExceptionMessage
+        [string]$ExceptionMessage,
+
+        [Parameter(ValueFromPipeline)]
+        [System.Management.Automation.Credential()]
+        [PSCredential] $Credential
     )
 
     begin {
         $ErrorActionPreference = 'Stop'
         $connSettings = Get-ConnectionString
-        $dbCredential = Get-DBCredential
         $RunDate2 = $RunDate.ToString("yyyy-MM-dd HH:mm:ss.fff")
+
+        $credSplat = @{}
+        if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
+            $credSplat['Credential'] = $Credential
+        }
 
         $Query = " 
         INSERT INTO [dbo].[job_logs] 
@@ -58,6 +66,6 @@ function Write-JobMessage {
     }
 
     process {
-      Invoke-sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database -Credential $dbCredential -Query $Query
+            Invoke-sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -Query $Query
     }
 }

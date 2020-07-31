@@ -1,10 +1,10 @@
-USE [Kraken]
-
 /****** Object:  Table [dbo].[ag_databases]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'ag_databases')  
+BEGIN  
 CREATE TABLE [dbo].[ag_databases](
 	[ag_name] [nvarchar](128) NULL,
 	[replica_server_name] [nvarchar](128) NULL,
@@ -26,12 +26,17 @@ CREATE TABLE [dbo].[ag_databases](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
+
+
+
 
 /****** Object:  Table [dbo].[ag_listeners]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
-
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'ag_listeners')  
+BEGIN  
 CREATE TABLE [dbo].[ag_listeners](
 	[ag_name] [nvarchar](128) NULL,
 	[listener_name] [nvarchar](63) NULL,
@@ -55,12 +60,15 @@ CREATE TABLE [dbo].[ag_listeners](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
 
 /****** Object:  Table [dbo].[availability_groups]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'availability_groups')  
+BEGIN
 CREATE TABLE [dbo].[availability_groups](
 	[ag_name] [nvarchar](128) NULL,
 	[failure_condition_level] [int] NULL,
@@ -81,12 +89,15 @@ CREATE TABLE [dbo].[availability_groups](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
 
 /****** Object:  Table [dbo].[availability_replicas]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'availability_replicas')  
+BEGIN
 CREATE TABLE [dbo].[availability_replicas](
 	[ag_name] [nvarchar](128) NULL,
 	[replica_server_name] [nvarchar](256) NULL,
@@ -118,12 +129,15 @@ CREATE TABLE [dbo].[availability_replicas](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
 
 /****** Object:  Table [dbo].[backups]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'backups')  
+BEGIN
 CREATE TABLE [dbo].[backups](
 	[db_name] [nvarchar](128) NULL,
 	[backup_start_date] [datetime2](7) NULL,
@@ -143,12 +157,15 @@ CREATE TABLE [dbo].[backups](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
 
 /****** Object:  Table [dbo].[database_files]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'database_files')  
+BEGIN
 CREATE TABLE [dbo].[database_files](
 	[db_name] [nvarchar](128) NULL,
 	[file_name] [nvarchar](128) NULL,
@@ -174,12 +191,17 @@ CREATE TABLE [dbo].[database_files](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
+
+
 
 /****** Object:  Table [dbo].[database_size]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'database_size')  
+BEGIN
 CREATE TABLE [dbo].[database_size](
 	[db_name] [nvarchar](128) NULL,
 	[Size_MB] [decimal](28, 2) NULL,
@@ -194,12 +216,17 @@ CREATE TABLE [dbo].[database_size](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
+
+
 
 /****** Object:  Table [dbo].[databases]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'databases')  
+BEGIN
 CREATE TABLE [dbo].[databases](
 	[database_id] [int] NULL,
 	[db_name] [nvarchar](128) NULL,
@@ -271,12 +298,17 @@ CREATE TABLE [dbo].[databases](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
+
+
 
 /****** Object:  Table [dbo].[hadr_cluster_members]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'hadr_cluster_members')
+BEGIN
 CREATE TABLE [dbo].[hadr_cluster_members](
 	[member_name] [nvarchar](128) NULL,
 	[member_type] [tinyint] NULL,
@@ -294,12 +326,17 @@ CREATE TABLE [dbo].[hadr_cluster_members](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
+
+
 
 /****** Object:  Table [dbo].[hadr_cluster_networks]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'hadr_cluster_networks')
+BEGIN
 CREATE TABLE [dbo].[hadr_cluster_networks](
 	[member_name] [nvarchar](128) NULL,
 	[network_subnet_ip] [nvarchar](48) NULL,
@@ -317,12 +354,15 @@ CREATE TABLE [dbo].[hadr_cluster_networks](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
 
 /****** Object:  Table [dbo].[hadr_clusters]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'hadr_clusters')
+BEGIN
 CREATE TABLE [dbo].[hadr_clusters](
 	[cluster_name] [nvarchar](128) NULL,
 	[quorum_type] [tinyint] NULL,
@@ -339,12 +379,17 @@ CREATE TABLE [dbo].[hadr_clusters](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
+
+
 
 /****** Object:  Table [dbo].[job_logs]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'job_logs')
+BEGIN
 CREATE TABLE [dbo].[job_logs](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[run_date] [datetime2](7) NULL,
@@ -359,12 +404,14 @@ CREATE TABLE [dbo].[job_logs](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[jobs]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'jobs')
+BEGIN
 CREATE TABLE [dbo].[jobs](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[job_name] [varchar](128) NOT NULL,
@@ -376,12 +423,14 @@ CREATE TABLE [dbo].[jobs](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[os_info]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'os_info')
+BEGIN
 CREATE TABLE [dbo].[os_info](
 	[cpu_count] [int] NULL,
 	[hyperthread_ratio] [int] NULL,
@@ -404,12 +453,14 @@ CREATE TABLE [dbo].[os_info](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[registry]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'registry')
+BEGIN
 CREATE TABLE [dbo].[registry](
 	[setting_name] [nvarchar](128) NULL,
 	[registry_key] [nvarchar](256) NULL,
@@ -425,12 +476,14 @@ CREATE TABLE [dbo].[registry](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[server_properties]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'server_properties')
+BEGIN
 CREATE TABLE [dbo].[server_properties](
 	[edition] [nvarchar](128) NULL,
 	[product_version] [nvarchar](128) NULL,
@@ -461,12 +514,15 @@ CREATE TABLE [dbo].[server_properties](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+END
 
 /****** Object:  Table [dbo].[server_role_membership]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'server_role_membership')
+BEGIN
 CREATE TABLE [dbo].[server_role_membership](
 	[login_name] [nvarchar](128) NULL,
 	[type] [nvarchar](60) NULL,
@@ -483,14 +539,16 @@ CREATE TABLE [dbo].[server_role_membership](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[sql_instances]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'sql_instances')
+BEGIN
 CREATE TABLE [dbo].[sql_instances](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[instance_name] [nvarchar](70) NOT NULL,
 	[environment] [nvarchar](35) NOT NULL,
 	[active] [tinyint] NOT NULL,
@@ -499,12 +557,14 @@ CREATE TABLE [dbo].[sql_instances](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[sql_logins]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'sql_logins')
+BEGIN
 CREATE TABLE [dbo].[sql_logins](
 	[login_name] [nvarchar](128) NULL,
 	[create_date] [datetime2](7) NULL,
@@ -533,12 +593,14 @@ CREATE TABLE [dbo].[sql_logins](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[sys_configurations]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'sys_configurations')
+BEGIN
 CREATE TABLE [dbo].[sys_configurations](
 	[configuration_id] [int] NULL,
 	[configuration_name] [nvarchar](35) NULL,
@@ -556,12 +618,14 @@ CREATE TABLE [dbo].[sys_configurations](
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Table [dbo].[volumes]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'volumes')
+BEGIN
 CREATE TABLE [dbo].[volumes](
 	[volume_mount_point] [nvarchar](512) NULL,
 	[logical_volume_name] [nvarchar](512) NULL,
@@ -577,319 +641,459 @@ CREATE TABLE [dbo].[volumes](
 	[run_date] [datetime2](7) NOT NULL,
 	[run_count] [int] NOT NULL,
 	[instance_id] [int] NOT NULL,
-	[id] [int] IDENTITY(1,1) NOT NULL
+	[id] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_volumes] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_ag_databases_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_ag_databases_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_ag_databases_instance_id] ON [dbo].[ag_databases]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_ag_databases_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_ag_databases_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_ag_databases_run_count] ON [dbo].[ag_databases]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_ag_listeners_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_ag_listeners_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_ag_listeners_instance_id] ON [dbo].[ag_listeners]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_ag_listeners_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_ag_listeners_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_ag_listeners_run_count] ON [dbo].[ag_listeners]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_availability_groups_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_availability_groups_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_availability_groups_instance_id] ON [dbo].[availability_groups]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_availability_groups_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_availability_groups_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_availability_groups_run_count] ON [dbo].[availability_groups]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_availability_replicas_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_availability_replicas_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_availability_replicas_instance_id] ON [dbo].[availability_replicas]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_availability_replicas_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_availability_replicas_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_availability_replicas_run_count] ON [dbo].[availability_replicas]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_backups_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_backups_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_backups_run_count] ON [dbo].[backups]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_database_files_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_database_files_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_database_files_instance_id] ON [dbo].[database_files]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_database_files_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_database_files_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_database_files_run_count] ON [dbo].[database_files]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_database_size_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_database_size_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_database_size_instance_id] ON [dbo].[database_size]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_database_size_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_database_size_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_database_size_run_count] ON [dbo].[database_size]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_databases_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_databases_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_databases_instance_id] ON [dbo].[databases]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_databases_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_databases_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_databases_run_count] ON [dbo].[databases]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_hadr_cluster_members_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_hadr_cluster_members_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_hadr_cluster_members_run_count] ON [dbo].[hadr_cluster_members]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_hadr_cluster_networks_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_hadr_cluster_networks_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_hadr_cluster_networks_instance_id] ON [dbo].[hadr_cluster_networks]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_hadr_cluster_networks_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_hadr_cluster_networks_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_hadr_cluster_networks_run_count] ON [dbo].[hadr_cluster_networks]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_hadr_clusters_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_hadr_clusters_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_hadr_clusters_instance_id] ON [dbo].[hadr_clusters]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_hadr_clusters_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_hadr_clusters_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_hadr_clusters_run_count] ON [dbo].[hadr_clusters]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_job_logs_job_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_job_logs_job_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_job_logs_job_id] ON [dbo].[job_logs]
 (
 	[job_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_job_logs_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_job_logs_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_job_logs_run_count] ON [dbo].[job_logs]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_os_info_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_os_info_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_os_info_instance_id] ON [dbo].[os_info]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_os_info_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_os_info_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_os_info_run_count] ON [dbo].[os_info]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_registry_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_registry_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_registry_instance_id] ON [dbo].[registry]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_registry_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_registry_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_registry_run_count] ON [dbo].[registry]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_server_properties_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_server_properties_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_server_properties_instance_id] ON [dbo].[server_properties]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_server_properties_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_server_properties_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_server_properties_run_count] ON [dbo].[server_properties]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_server_role_membership_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_server_role_membership_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_server_role_membership_instance_id] ON [dbo].[server_role_membership]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_server_role_membership_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_server_role_membership_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_server_role_membership_run_count] ON [dbo].[server_role_membership]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_sql_logins_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_sql_logins_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_sql_logins_instance_id] ON [dbo].[sql_logins]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_sql_logins_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_sql_logins_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_sql_logins_run_count] ON [dbo].[sql_logins]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_sys_configurations_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_sys_configurations_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_sys_configurations_instance_id] ON [dbo].[sys_configurations]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_sys_configurations_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_sys_configurations_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_sys_configurations_run_count] ON [dbo].[sys_configurations]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_volumes_instance_id]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_volumes_instance_id')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_volumes_instance_id] ON [dbo].[volumes]
 (
 	[instance_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
+END
 /****** Object:  Index [IX_volumes_run_count]    Script Date: 7/29/2020 1:17:05 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_volumes_run_count')
+BEGIN
 CREATE NONCLUSTERED INDEX [IX_volumes_run_count] ON [dbo].[volumes]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_ag_databases')
+BEGIN
 ALTER TABLE [dbo].[ag_databases]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_ag_databases] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[ag_databases] CHECK CONSTRAINT [FK_sql_instances_ag_databases]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_ag_listeners')
+BEGIN
 ALTER TABLE [dbo].[ag_listeners]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_ag_listeners] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[ag_listeners] CHECK CONSTRAINT [FK_sql_instances_ag_listeners]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_availability_groups')
+BEGIN
 ALTER TABLE [dbo].[availability_groups]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_availability_groups] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[availability_groups] CHECK CONSTRAINT [FK_sql_instances_availability_groups]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_availability_replicas')
+BEGIN
 ALTER TABLE [dbo].[availability_replicas]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_availability_replicas] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[availability_replicas] CHECK CONSTRAINT [FK_sql_instances_availability_replicas]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_backups')
+BEGIN
 ALTER TABLE [dbo].[backups]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_backups] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[backups] CHECK CONSTRAINT [FK_sql_instances_backups]
+END
 
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_database_files')
+BEGIN
 ALTER TABLE [dbo].[database_files]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_database_files] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[database_files] CHECK CONSTRAINT [FK_sql_instances_database_files]
+END
 
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_database_size')
+BEGIN
 ALTER TABLE [dbo].[database_size]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_database_size] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[database_size] CHECK CONSTRAINT [FK_sql_instances_database_size]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_databases')
+BEGIN
 ALTER TABLE [dbo].[databases]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_databases] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[databases] CHECK CONSTRAINT [FK_sql_instances_databases]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_hadr_cluster_members')
+BEGIN
 ALTER TABLE [dbo].[hadr_cluster_members]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_hadr_cluster_members] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[hadr_cluster_members] CHECK CONSTRAINT [FK_sql_instances_hadr_cluster_members]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_hadr_cluster_networks')
+BEGIN
 ALTER TABLE [dbo].[hadr_cluster_networks]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_hadr_cluster_networks] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[hadr_cluster_networks] CHECK CONSTRAINT [FK_sql_instances_hadr_cluster_networks]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_hadr_clusters')
+BEGIN
 ALTER TABLE [dbo].[hadr_clusters]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_hadr_clusters] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[hadr_clusters] CHECK CONSTRAINT [FK_sql_instances_hadr_clusters]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_jobs_job_logs')
+BEGIN
 ALTER TABLE [dbo].[job_logs]  WITH CHECK ADD  CONSTRAINT [FK_jobs_job_logs] FOREIGN KEY([job_id])
 REFERENCES [dbo].[jobs] ([id])
 
 ALTER TABLE [dbo].[job_logs] CHECK CONSTRAINT [FK_jobs_job_logs]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_os_info')
+BEGIN
 ALTER TABLE [dbo].[os_info]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_os_info] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[os_info] CHECK CONSTRAINT [FK_sql_instances_os_info]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_registry')
+BEGIN
 ALTER TABLE [dbo].[registry]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_registry] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[registry] CHECK CONSTRAINT [FK_sql_instances_registry]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_server_properties')
+BEGIN
 ALTER TABLE [dbo].[server_properties]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_server_properties] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[server_properties] CHECK CONSTRAINT [FK_sql_instances_server_properties]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_server_role_membership')
+BEGIN
 ALTER TABLE [dbo].[server_role_membership]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_server_role_membership] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[server_role_membership] CHECK CONSTRAINT [FK_sql_instances_server_role_membership]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_sql_logins')
+BEGIN
 ALTER TABLE [dbo].[sql_logins]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_sql_logins] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[sql_logins] CHECK CONSTRAINT [FK_sql_instances_sql_logins]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_sys_configurations')
+BEGIN
 ALTER TABLE [dbo].[sys_configurations]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_sys_configurations] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[sys_configurations] CHECK CONSTRAINT [FK_sql_instances_sys_configurations]
+END
 
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_volumes')
+BEGIN
 ALTER TABLE [dbo].[volumes]  WITH CHECK ADD  CONSTRAINT [FK_sql_instances_volumes] FOREIGN KEY([instance_id])
 REFERENCES [dbo].[sql_instances] ([Id])
 
 ALTER TABLE [dbo].[volumes] CHECK CONSTRAINT [FK_sql_instances_volumes]
+END
 
+IF NOT EXISTS ( SELECT 1 FROM dbo.jobs WHERE job_name = 'Kraken-Main')
+BEGIN
 INSERT INTO dbo.jobs
 VALUES ('Kraken-Main',1,null,0)
+END

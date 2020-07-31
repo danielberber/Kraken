@@ -18,21 +18,27 @@ function Get-SQLInstance {
         [string[]]$Environment,
 
         [Parameter(ParameterSetName = 'All')]
-        [switch]$All
+        [switch]$All,
+
+        [Parameter(ValueFromPipeline)]
+        [System.Management.Automation.Credential()]
+        [PSCredential] $Credential
     )
 
     begin {
         $ErrorActionPreference = 'Stop'
         $connSettings = Get-ConnectionString
-        $dbCredential = Get-DBCredential
         $ModulePath = (Split-Path $PSScriptRoot)
         $GetSQLInstance = "$ModulePath\Private\SQLScripts\Get-SQLInstance.sql"
+
+        $credSplat = @{}
+        if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
+            $credSplat['Credential'] = $Credential
+        }
     }
 
     process {
-
-        $SQLInstanceList = Invoke-Sqlcmd -ServerInstance $connSettings.server -Database $connSettings.database -Credential $dbCredential -InputFile $GetSQLInstance
-
+        $SQLInstanceList = Invoke-Sqlcmd -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $GetSQLInstance
         switch ($PSCmdlet.ParameterSetName) { #$PSBoundParameters.Keys
 
             'ById' {
