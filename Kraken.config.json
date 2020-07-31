@@ -1,85 +1,85 @@
 {
-    "info":  {
-                 "project":  "Kraken PowerShell Module",
-                 "author:":  "Daniel Berber",
-                 "version":  "0.1"
-             },
-    "dbsettings":  {
-                       "server":  "<server name>",
-                       "database":  "<database>"
-                   },
-    "Commands":  {
-                     "Get-ServerProperties":  {
-                                                  "dest_table":  "server_properties",
-                                                  "query_name":  "Get-ServerProperties.sql"
-                                              },
-                     "Get-SysConfigurations":  {
-                                                   "dest_table":  "sys_configurations",
-                                                   "query_name":  "Get-SysConfigurations.sql"
-                                               },
-                     "Get-OSInfo":  {
-                                        "dest_table":  "os_info",
-                                        "query_name":  "Get-OSInfo.sql"
-                                    },
-                     "Get-AvailabilityGroups":  {
-                                                    "dest_table":  "availability_groups",
-                                                    "query_name":  "Get-AvailabilityGroups.sql"
-                                                },
-                     "Get-AvailabilityReplicas":  {
-                                                      "dest_table":  "availability_replicas",
-                                                      "query_name":  "Get-AvailabilityReplicas.sql"
-                                                  },
-                     "Get-ListenerInfo":  {
-                                              "dest_table":  "ag_listeners",
-                                              "query_name":  "Get-ListenerInfo.sql"
-                                          },
-                     "Get-DatabaseSize":  {
-                                              "dest_table":  "database_size",
-                                              "query_name":  "Get-DatabaseSize.sql"
-                                          },
-                     "Get-AGDatabases":  {
-                                             "dest_table":  "ag_databases",
-                                             "query_name":  "Get-AGDatabases.sql"
-                                         },
-                     "Get-Databases":  {
-                                           "dest_table":  "databases",
-                                           "query_name":  "Get-Databases.sql"
-                                       },
-                     "Get-DatabaseFiles":  {
-                                               "dest_table":  "database_files",
-                                               "query_name":  "Get-DatabaseFiles.sql"
-                                           },
-                     "Get-Backups":  {
-                                         "dest_table":  "backups",
-                                         "query_name":  "Get-Backups.sql"
-                                     },
-                     "Get-Registry":  {
-                                          "dest_table":  "registry",
-                                          "query_name":  "Get-Registry.sql"
-                                      },
-                     "Get-Hadr_Cluster":  {
-                                              "dest_table":  "hadr_clusters",
-                                              "query_name":  "Get-Hadr_Cluster.sql"
-                                          },
-                     "Get-Hadr_Cluster_Members":  {
-                                                      "dest_table":  "hadr_cluster_members",
-                                                      "query_name":  "Get-Hadr_Cluster_Members.sql"
-                                                  },
-                     "Get-Hadr_Cluster_Networks":  {
-                                                       "dest_table":  "hadr_cluster_networks",
-                                                       "query_name":  "Get-Hadr_Cluster_Networks.sql"
-                                                   },
-                     "Get-SQL_Logins":  {
-                                            "dest_table":  "sql_logins",
-                                            "query_name":  "Get-SQL_Logins.sql"
-                                        },
-                     "Get-Server_Role_Membership":  {
-                                                        "dest_table":  "server_role_membership",
-                                                        "query_name":  "Get-Server_Role_Membership.sql"
-                                                    },
-                     "Get-Volumes":  {
-                                         "dest_table":  "volumes",
-                                         "query_name":  "Get-Volumes.sql"
-                                     }
-                 }
+    "info": {
+        "project": "Kraken PowerShell Module",
+        "author:": "Daniel Berber",
+        "version": "0.1"
+    },
+    "dbsettings": {
+        "server": "<repo db server>",
+        "database": "<db user>"
+    },
+    "Commands": {
+        "Get-ServerProperties": {
+            "dest_table": "server_properties",
+            "query_name": "Get-ServerProperties.sql"
+        },
+        "Get-SysConfigurations": {
+            "dest_table": "sys_configurations",
+            "query_name": "Get-SysConfigurations.sql"
+        },
+        "Get-OSInfo": {
+            "dest_table": "os_info",
+            "query_name": "Get-OSInfo.sql"
+        },
+        "Get-AvailabilityGroups": {
+            "dest_table": "availability_groups",
+            "query_name": "Get-AvailabilityGroups.sql"
+        },
+        "Get-AvailabilityReplicas": {
+            "dest_table": "availability_replicas",
+            "query_name": "Get-AvailabilityReplicas.sql"
+        },
+        "Get-ListenerInfo": {
+            "dest_table": "ag_listeners",
+            "query_name": "Get-ListenerInfo.sql"
+        },
+        "Get-DatabaseSize": {
+            "dest_table": "database_size",
+            "query_name": "Get-DatabaseSize.sql"
+        },
+        "Get-AGDatabases": {
+            "dest_table": "ag_databases",
+            "query_name": "Get-AGDatabases.sql"
+        },
+        "Get-Databases": {
+            "dest_table": "databases",
+            "query_name": "Get-Databases.sql"
+        },
+        "Get-DatabaseFiles": {
+            "dest_table": "database_files",
+            "query_name": "Get-DatabaseFiles.sql"
+        },
+        "Get-Backups": {
+            "dest_table": "backups",
+            "query_name": "Get-Backups.sql"
+        },
+        "Get-Registry": {
+            "dest_table": "registry",
+            "query_name": "Get-Registry.sql"
+        },
+        "Get-Hadr_Cluster": {
+            "dest_table": "hadr_clusters",
+            "query_name": "Get-Hadr_Cluster.sql"
+        },
+        "Get-Hadr_Cluster_Members": {
+            "dest_table": "hadr_cluster_members",
+            "query_name": "Get-Hadr_Cluster_Members.sql"
+        },
+        "Get-Hadr_Cluster_Networks": {
+            "dest_table": "hadr_cluster_networks",
+            "query_name": "Get-Hadr_Cluster_Networks.sql"
+        },
+        "Get-SQL_Logins": {
+            "dest_table": "sql_logins",
+            "query_name": "Get-SQL_Logins.sql"
+        },
+        "Get-Server_Role_Membership": {
+            "dest_table": "server_role_membership",
+            "query_name": "Get-Server_Role_Membership.sql"
+        },
+        "Get-Volumes": {
+            "dest_table": "volumes",
+            "query_name": "Get-Volumes.sql"
+        }
+    }
 }

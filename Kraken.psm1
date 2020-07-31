@@ -9,7 +9,8 @@ foreach ($import in @($Public + $Private)) {
     try {
         Write-Verbose "Importing $($import.FullName)"
         . $import.FullName
-    } catch {
+    }
+    catch {
         Write-Error "Failed to import function $($import.FullName): $_"
     }
 }

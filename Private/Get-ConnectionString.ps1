@@ -1,4 +1,4 @@
-function Get-ConnectionString{
+function Get-ConnectionString {
     [OutputType('pscustomobject')]
     [CmdletBinding()]
     param()
@@ -11,8 +11,8 @@ function Get-ConnectionString{
     process {
 
         $connDetails = @{
-        Server = $json.dbsettings.server
-        Database = $json.dbsettings.database
+            Server   = $json.dbsettings.server
+            Database = $json.dbsettings.database
         }
 
         Return $connDetails

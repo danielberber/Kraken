@@ -66,6 +66,6 @@ function Write-JobMessage {
     }
 
     process {
-            Invoke-sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -Query $Query
+        Invoke-sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -Query $Query
     }
 }

@@ -14,7 +14,7 @@ function Invoke-TheKraken {
 
         [Parameter(ParameterSetName = 'All')]
         [switch]$All,
-
+    
         [Parameter(ValueFromPipeline)]
         [System.Management.Automation.Credential()]
         [PSCredential] $Credential

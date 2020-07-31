@@ -26,9 +26,9 @@ function Get-Job {
     }
 
     process {
-         $sqlParameters = @{Name=$JobName}
-         $Job = Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $GetJob -sqlparameters $sqlParameters 
-         Return $Job
+        $sqlParameters = @{Name = $JobName }
+        $Job = Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $GetJob -sqlparameters $sqlParameters 
+        Return $Job
 
     }
 }

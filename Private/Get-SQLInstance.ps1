@@ -1,6 +1,6 @@
 function Get-SQLInstance {
     [OutputType('void')]
-    [CmdletBinding(DefaultParameterSetName='All')]
+    [CmdletBinding(DefaultParameterSetName = 'All')]
     param
     (
 
@@ -31,6 +31,7 @@ function Get-SQLInstance {
         $ModulePath = (Split-Path $PSScriptRoot)
         $GetSQLInstance = "$ModulePath\Private\SQLScripts\Get-SQLInstance.sql"
 
+        
         $credSplat = @{}
         if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
             $credSplat['Credential'] = $Credential
@@ -38,17 +39,18 @@ function Get-SQLInstance {
     }
 
     process {
-        $SQLInstanceList = Invoke-Sqlcmd -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $GetSQLInstance
-        switch ($PSCmdlet.ParameterSetName) { #$PSBoundParameters.Keys
+        $SQLInstanceList = Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database -InputFile $GetSQLInstance @credSplat
+        switch ($PSCmdlet.ParameterSetName) {
+            #$PSBoundParameters.Keys
 
             'ById' {
-                $SQLInstanceList | Where-Object { $_.id -in $Id}
+                $SQLInstanceList | Where-Object { $_.id -in $Id }
             }
             'ByName' {
-                $SQLInstanceList | Where-Object { $_.instance_name -in $Name}
+                $SQLInstanceList | Where-Object { $_.instance_name -in $Name }
             }
-            'ByEnv'{
-                $SQLInstanceList | Where-Object { $_.environment -in $Environment}
+            'ByEnv' {
+                $SQLInstanceList | Where-Object { $_.environment -in $Environment }
             }
             'All' {
                 $SQLInstanceList

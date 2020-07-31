@@ -26,8 +26,8 @@ function Update-RunCount {
     }
 
     process {
-         $sqlParameters = @{Name=$JobName}
-         Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $UpdateRunCount -sqlparameters $sqlParameters 
-         #Return $RunCount
+        $sqlParameters = @{Name = $JobName }
+        Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $UpdateRunCount -sqlparameters $sqlParameters 
+        #Return $RunCount
     }
 }

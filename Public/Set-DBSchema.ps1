@@ -22,8 +22,8 @@ function Set-DBSchema {
 
     process {
         try {
-                Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $DBSchema
-                Write-Output "Database schema created succesfully"
+            Invoke-Sqlcmd2 -ServerInstance $connSettings.server -Database $connSettings.database @credSplat -InputFile $DBSchema
+            Write-Output "Database schema created succesfully"
         }
         catch {
             Write-Output "Error creating the database schema: $($_.Exception.Message)"

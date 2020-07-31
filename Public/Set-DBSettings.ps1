@@ -1,14 +1,14 @@
-function Set-DBSettings{
+function Set-DBSettings {
     [OutputType('void')]
     [CmdletBinding()]
     param
     (
-    [Parameter(Mandatory)]
-    [ValidateNotNullOrEmpty()]
-    [string] $dbserver,
-    [ValidateNotNullOrEmpty()]
-    [Parameter(Mandatory)]
-    [string] $dbname
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string] $dbserver,
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory)]
+        [string] $dbname
     )
 
     begin {
