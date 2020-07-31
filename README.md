@@ -21,7 +21,7 @@ You could configure this to run on a schedule to get the full potential and be a
  
 #### Install dependencies
 
-The only dependency is on sqlserver. Please install the sql server module prior installing Kraken
+The only dependency is on sqlserver. Please install the sql server module prior installing Kraken.
 
 ```sh
 Install-module sqlserver
@@ -38,18 +38,18 @@ Import-module Kraken
 ### Create Database & login
 
   - Create a repository database in your SQL Server, it could be any name but for simplicity you can name it Kraken
-  - Create a sql login and map it to your repository database with read and write privileges "db_datareader" and "db_darawriter" should do. This login information will be needed on the next step when saving the values to Kraken config file.
+  - Create a login and map it to your repository database (it can be a Windows or SQL login) with read and write privileges "db_datareader" and "db_darawriter" should do. 
 
 ### Set Kraken config values
 
-Kraken uses a config file to retain information of the repository server and database, as well as the sql login that will be used to connect to the target servers and collect the information. The password for the account is encrypted.
+Kraken uses a config file to retain the values for the repository server and database.
 
 Run the following cmdlet to set these values
 
 ```sh
  Set-DBSettings
 ```
-- credentials: enter the sql login and password previously created on the repository server. It has to be a sql account, trusted authentication is not supported for now.
+
 - dbserver: sqlservername.fqdn.com\instancename (enter the server name on this format)
 - dbname: Kraken (it could be any name but use Kraken for identification purposes)
 
@@ -83,7 +83,7 @@ Insert values to the sql_instances table.
 
 ### Create login and set permission on target servers
 
-Create a login with the same name and password used in your repository database in all your target servers. This time though the only privileges needed are the following. Execute this after the login creation.
+Create a login (same name and password) as used in your repository database in all your target servers. This time though the only privileges needed are the following. Execute this after the login creation.
 
 ```sh
 use [master]
@@ -114,6 +114,3 @@ This cmdlet can accept different parameters:
 ### Future enhancements
 
  - Make the process run in parallel
- 
-
- 
