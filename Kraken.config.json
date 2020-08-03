@@ -2,7 +2,7 @@
     "info": {
         "project": "Kraken PowerShell Module",
         "author:": "Daniel Berber",
-        "version": "0.2"
+        "version": "1.0.0"
     },
     "dbsettings": {
         "server": "<repo db server>",
