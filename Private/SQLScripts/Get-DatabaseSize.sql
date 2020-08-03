@@ -1,3 +1,6 @@
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SET NUMERIC_ROUNDABORT OFF
+SET ARITHABORT ON
 if exists (select * from tempdb.sys.all_objects where name like '%#dbsize%') 
 drop table #dbsize 
 create table #dbsize 

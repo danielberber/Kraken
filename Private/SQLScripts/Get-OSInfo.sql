@@ -1,4 +1,6 @@
-
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SET NUMERIC_ROUNDABORT OFF
+SET ARITHABORT ON
 ;WITH potential_columns AS
 (
   SELECT 
@@ -7,6 +9,7 @@
    physical_memory_kb          = CONVERT(bigint        , NULL),
    sql_memory_model_desc       = CONVERT(nvarchar(120) , NULL),
    softnuma_configuration      = CONVERT(int           , NULL),
+   softnuma_configuration_desc = CONVERT(nvarchar(60)  , NULL),
    socket_count                = CONVERT(int           , NULL),
    cores_per_socket            = CONVERT(int           , NULL),
    numa_node_count             = CONVERT(int           , NULL),

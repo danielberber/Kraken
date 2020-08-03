@@ -1,3 +1,6 @@
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SET NUMERIC_ROUNDABORT OFF
+SET ARITHABORT ON
 SELECT DISTINCT
   vs.volume_mount_point AS [volume],
   vs.logical_volume_name AS [label],

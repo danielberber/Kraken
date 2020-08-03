@@ -1,3 +1,6 @@
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SET NUMERIC_ROUNDABORT OFF
+SET ARITHABORT ON
 SELECT UPPER(SSP.name) LoginName,SSP.type_desc as 'Type',UPPER(SSPS.name) ServerRole,
                             SSP.is_disabled
                             ,SSP.default_database_name 

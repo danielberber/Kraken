@@ -1,3 +1,6 @@
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SET NUMERIC_ROUNDABORT OFF
+SET ARITHABORT ON
 SELECT name, create_date, modify_date, sid,
 LOGINPROPERTY(name, 'BadPasswordCount') AS 'BadPasswordCount'
 ,LOGINPROPERTY(name, 'BadPasswordTime') AS 'BadPasswordTime'
