@@ -6,7 +6,7 @@
     },
     "dbsettings": {
         "server": "<repo db server>",
-        "database": "<db user>"
+        "database": "<db name>"
     },
     "Commands": {
         "Get-ServerProperties": {

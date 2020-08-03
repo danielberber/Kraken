@@ -1,3 +1,41 @@
+<#
+.SYNOPSIS
+  Executes the collector process
+
+.DESCRIPTION
+  Invoke-TheKraken is the main process which collects metadata information and stores it into the repository database
+
+.PARAMETER Environment
+    Must match values set on the column environment on the sql_instances table. It executes the process against target sql servers that meet the environment criteria
+
+.PARAMETER Name
+    Must match instance_name column values on the sql_instances table. It executes the process against specific target sql servers pass in this comma separated list. SQL Instance must exist in the sql_instances table
+
+.PARAMETER All
+    If this Switch is used, the process is executed against all Active SQL Server Instances listed on the sql_instances table
+
+.PARAMETER Credential
+    Credential [PSCredential] - If not specified it uses Trusted Authentication, else it will SQL Authentication
+
+.INPUTS
+  Credential [PSCredential]
+
+.OUTPUTS
+  None 
+  
+.EXAMPLE
+  Executes the process just against DEV Target Servers
+  
+  Invoke-TheKraken -Environment "DEV"
+
+.EXAMPLE
+  Executes the process just against All Target Servers
+  
+  Invoke-TheKraken -All
+  
+.LINK
+            https://github.com/dokier/Kraken
+#>
 function Invoke-TheKraken {
     [OutputType('void')]
     [CmdletBinding(DefaultParameterSetName = 'All')]

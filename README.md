@@ -25,7 +25,6 @@ The only dependency is on sqlserver. Please install the sql server module prior 
 
 ```sh
 Install-module sqlserver
-Import-module sqlserver
 ```
 
 ### Install Kraken Module
