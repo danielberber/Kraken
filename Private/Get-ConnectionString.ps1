@@ -3,9 +3,9 @@ function Get-ConnectionString {
     [CmdletBinding()]
     param()
     begin {
+        
         $ErrorActionPreference = 'Stop'
-        $script:PSConfigPath = (Get-Item $PSScriptRoot).Parent.FullName
-        $json = Get-Content -Path $script:PSConfigPath\Kraken.config.json -Raw | ConvertFrom-Json
+        $json = Get-Content -Path $env:ProgramData\Kraken\Kraken.config.json -Raw | ConvertFrom-Json
     }
 
     process {

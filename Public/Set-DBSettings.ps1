@@ -41,12 +41,18 @@ function Set-DBSettings {
     begin {
         $ErrorActionPreference = 'Stop'
         $script:PSConfigPath = (Get-Item $PSScriptRoot).Parent.FullName
-        $json = Get-Content -Path $script:PSConfigPath\Kraken.config.json -Raw | ConvertFrom-Json
+
+        if(!(Test-Path -Path "$env:ProgramData\Kraken")){
+            New-Item -ItemType directory -Path "$env:ProgramData\Kraken" 
+        }
+        Copy-Item $script:PSConfigPath\Kraken.config.json -Destination "$env:ProgramData\Kraken" -Force
+
+        $json = Get-Content -Path $env:ProgramData\Kraken\Kraken.config.json -Raw | ConvertFrom-Json
     }
 
     process {        
         $json.dbsettings.server = $dbserver
         $json.dbsettings.database = $dbname
-        $json | ConvertTo-Json -depth 100 | Set-Content $script:PSConfigPath\Kraken.config.json
+        $json | ConvertTo-Json -depth 100 | Set-Content $env:ProgramData\Kraken\Kraken.config.json
     }
 }

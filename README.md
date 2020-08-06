@@ -1,4 +1,4 @@
-# Kraken 1.0.2
+# Kraken 1.0.3
 
 Kraken is a PowerShell Module which collects useful sql server metadata information for auditing and reporting purposes. It executes a series of lightweight, non-intrusive sql server queries and stores the information in your repository database. It is backward compatible down to SQL Server 2008 R2. Information collected includes:
 
@@ -19,12 +19,13 @@ You could configure this to run on a schedule to get the full potential and be a
 
 # Getting Started
  
-#### Install dependencies
+#### Install module dependencies
 
-The only dependency is on sqlserver. Please install the sql server module prior installing Kraken.
+Please install the following two modules prior installing Kraken.
 
 ```sh
 Install-module sqlserver
+Install-module PoshRSJob
 ```
 
 ### Install Kraken Module
@@ -41,7 +42,7 @@ Import-module Kraken
 
 ### Set Kraken config values
 
-Kraken uses a config file to retain the values for the repository server and database.
+Kraken uses a config file located in $env:ProgramData to retain the values for the repository server and database.
 
 Run the following cmdlet to set these values
 
@@ -103,13 +104,28 @@ I wanted to call this cmdlet *Release-TheKraken* but.... "Release" is a PowerShe
 ```sh
  Invoke-TheKraken
 ```
+Examples:
+
+Using Windows Authentication and running it for all environments using 4 concurrent runspace jobs
+
+```sh
+ Invoke-TheKraken -All -Throttle 4
+```
+
+Using SQL Authentication and running it for "DEV" target servers only with default Throttle value (number of cpus)
+```sh
+$Credential = Get-Credential
+Invoke-TheKraken -Environment "DEV" -Credentials $Credential
+```
 
 This cmdlet can accept different parameters:
 
 - -All (switch) - This is default one. It will execute the process against all your active sql servers listed on the sql_instances table
 - Environment (parameter) - Based on the values you defined in the environment column in sql_instances, you can use this parameter to only execute the process against a particular environment type. 
 - Name (parameter) - You can also execute the process against specific sql servers instances by using this parameter, you can comma separate them if you want to include multiple. The SQL Instance must exist in y our sql_instances table otherwise the process will not execute against that target sql instance.
+- Credential - If not specified it uses Trusted Authentication, else it will SQL Authentication
+- Throttle - Number of concurrent running runspace jobs which are allowed at a time (Default number of CPUs)
 
 ### Future enhancements
 
- - Make the process run in parallel
+ - ~~Make the process run in parallel~~ *It goes parallel now!*
