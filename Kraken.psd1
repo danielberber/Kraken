@@ -1,6 +1,6 @@
 @{
 	RootModule        = 'Kraken.psm1'
-	ModuleVersion     = '1.0.3'
+	ModuleVersion     = '1.0.4'
 	GUID              = '6c92d16e-9da5-4f35-8567-11a211f85833'
 	Author            = 'Daniel Berber'
 	Copyright         = '(c) Daniel Berber. All rights reserved.'

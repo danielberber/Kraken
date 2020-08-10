@@ -39,6 +39,7 @@ function Write-JobMessage {
         $ErrorActionPreference = 'Stop'
         $connSettings = Get-ConnectionString
         $RunDate2 = $RunDate.ToString("yyyy-MM-dd HH:mm:ss.fff")
+        $ExceptionMessage= $ExceptionMessage.Replace("'","''")
 
         $credSplat = @{}
         if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {

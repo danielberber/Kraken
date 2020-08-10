@@ -99,9 +99,12 @@ function Invoke-TheKraken {
         [void]$(Update-RunCount -JobName  "Kraken-Main" @credSplat)
         $RunCount = $Job.run_count + 1
 
+        #Removing old jobs in case the user aborted the process Ctrl C and re-executes on the same session
+        Get-RSJob -Name "Kraken" | Remove-RSJob
         #SCRIPT BLOCK to go parallel
-
-        $SQLInstanceList | Start-RSJob -Name { $_.instance_name } -Throttle $Throttle -ScriptBlock {         
+        $SQLInstanceList | Start-RSJob -Name { "Kraken" } -Throttle $Throttle -ScriptBlock {   
+            
+            #$_.instance_name
             $RunDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
             
             #Passing parent variables to scriptblock
@@ -124,6 +127,7 @@ function Invoke-TheKraken {
             catch {
                 $ConnStatus = $False
                 Write-JobMessage -RunDate $RunDate -RunCount $Using:RunCount -SQLInstance $LocalInstance -JobId $LocalJob.id -StepName "Test-Connectivity" -Success $False -ExceptionMessage $_.Exception.Message @Using:credSplat
+                Write-Output "Test-Connectivity FAILED. Exception: $($_.Exception.Message)"
             } 
             
             if ($ConnStatus -eq $True) { 
@@ -137,11 +141,14 @@ function Invoke-TheKraken {
                         $DataSet | Add-Member -MemberType NoteProperty -Name "run_count" -Value $Using:RunCount
                         $DataSet | Add-Member -MemberType NoteProperty -Name "instance_id" -Value $LocalInstanceId
                         $DataSet | Add-Member -MemberType NoteProperty  -Name "id" -Value ""
-                        $DataSet | Write-SqlTableData -ServerInstance $LocalconnSettings.server -DatabaseName $LocalconnSettings.database -SchemaName dbo -TableName $LocalCommands.$cmdName.dest_table @Using:credSplat -Force -ErrorAction Stop
+                        If ($Dataset){
+                        Write-WrappedSqlTableData -ServerInstance $LocalconnSettings.server -DatabaseName $LocalconnSettings.database -SchemaName dbo -TableName $LocalCommands.$cmdName.dest_table -InputData $DataSet @Using:credSplat -Force -ErrorAction Stop
+                        }
                         Write-JobMessage -RunDate $RunDate -RunCount $Using:RunCount -SQLInstance $LocalInstance -JobId $LocalJob.id -StepName $cmdName -Success $True @Using:credSplat
                     }
                     catch {
                         Write-JobMessage -RunDate $RunDate -RunCount $Using:RunCount -SQLInstance $LocalInstance -JobId $LocalJob.id -StepName $cmdName -Success $False -ExceptionMessage $_.Exception.Message @Using:credSplat
+                        Write-Output "$($cmdName) FAILED. Exception: $($_.Exception.Message)"
                     }                
                 }
             } 
@@ -164,9 +171,9 @@ function Invoke-TheKraken {
 
         Write-Output "`nALL JOBS HAVE FINISHED"
         Write-Output "`nJOBS OUTPUT -" 
-        Get-RSJob | Receive-RSJob      
+        Get-RSJob -Name "Kraken" | Receive-RSJob      
         Write-Output "`nREMOVING OLD JOBS"
-        Get-RSJob | Remove-RSJob
+        Get-RSJob -Name "Kraken" | Remove-RSJob
         Write-Output "FINISHED" 
     } # Process
 }
