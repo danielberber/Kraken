@@ -1,4 +1,4 @@
-# Kraken 1.0.5
+# Kraken 1.0.6
 
 Kraken is a PowerShell Module which collects useful sql server metadata information for auditing and reporting purposes. It executes a series of lightweight, non-intrusive sql server queries and stores the information in your repository database. It is backward compatible down to SQL Server 2008 R2. Information collected includes:
 

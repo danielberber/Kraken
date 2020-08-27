@@ -624,10 +624,9 @@ END
 
 /****** Object:  Table [dbo].[tlog_space]    Script Date: 8/27/2020 9:32:22 AM ******/
 SET ANSI_NULLS ON
-GO
 
 SET QUOTED_IDENTIFIER ON
-GO
+
 IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'tlog_space')
 BEGIN
 CREATE TABLE [dbo].[tlog_space](
