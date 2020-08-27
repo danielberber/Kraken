@@ -230,6 +230,8 @@ BEGIN
 CREATE TABLE [dbo].[databases](
 	[database_id] [int] NULL,
 	[db_name] [nvarchar](128) NULL,
+	[source_database_id] [int] NULL,
+	[source_database_name] [nvarchar](128) NULL,
 	[owner_sid] [varbinary](85) NULL,
 	[owner_name] [nvarchar](128) NULL,
 	[create_date] [datetime2](7) NULL,
@@ -619,6 +621,31 @@ CREATE TABLE [dbo].[sys_configurations](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
+
+/****** Object:  Table [dbo].[tlog_space]    Script Date: 8/27/2020 9:32:22 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'tlog_space')
+BEGIN
+CREATE TABLE [dbo].[tlog_space](
+	[database_name] [nvarchar](128) NULL,
+	[log_size_mb] [real] NULL,
+	[log_space_used_%] [real] NULL,
+	[status] [int] NULL,
+	[job_id] [int] NOT NULL,
+	[run_date] [datetime2](7) NOT NULL,
+	[run_count] [int] NOT NULL,
+	[instance_id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_tlog_space] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 /****** Object:  Table [dbo].[volumes]    Script Date: 7/29/2020 1:17:05 PM ******/
 SET ANSI_NULLS ON
 
@@ -936,6 +963,30 @@ CREATE NONCLUSTERED INDEX [IX_volumes_run_count] ON [dbo].[volumes]
 (
 	[run_count] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+/****** Object:  Index [IX_volumes_instance_id]    Script Date: 8/27/2020 9:42:15 AM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_tlog_space_instance_id')
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_tlog_space_instance_id] ON [dbo].[tlog_space]
+(
+	[instance_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+/****** Object:  Index [IX_volumes_run_count]    Script Date: 8/27/2020 9:42:19 AM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_tlog_space_run_count')
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_tlog_space_run_count] ON [dbo].[tlog_space]
+(
+	[run_count] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_tlog_space')
+BEGIN
+ALTER TABLE [dbo].[tlog_space]  WITH NOCHECK ADD  CONSTRAINT [FK_sql_instances_tlog_space] FOREIGN KEY([instance_id])
+REFERENCES [dbo].[sql_instances] ([id])
+
+ALTER TABLE [dbo].[tlog_space] CHECK CONSTRAINT [FK_sql_instances_tlog_space]
 END
 
 IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_ag_databases')

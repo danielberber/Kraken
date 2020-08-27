@@ -23,7 +23,7 @@ SET ARITHABORT ON
 select m.* from potential_columns
 CROSS APPLY 
 (
-select database_id, name, owner_sid, SUSER_SNAME(owner_sid) as database_owner, create_date, compatibility_level, collation_name, user_access_desc, is_read_only, is_auto_close_on, is_auto_shrink_on,
+select database_id, name, source_database_id, DB_NAME(source_database_id) as source_database_name, owner_sid, SUSER_SNAME(owner_sid) as database_owner, create_date, compatibility_level, collation_name, user_access_desc, is_read_only, is_auto_close_on, is_auto_shrink_on,
 state_desc, is_in_standby, snapshot_isolation_state_desc, is_read_committed_snapshot_on, recovery_model_desc, page_verify_option_desc,
 is_auto_create_stats_on, is_auto_create_stats_incremental_on, is_auto_update_stats_on, is_auto_update_stats_async_on, 
 is_ansi_nulls_on, is_ansi_padding_on, is_ansi_warnings_on, is_arithabort_on, is_concat_null_yields_null_on, is_numeric_roundabort_on,

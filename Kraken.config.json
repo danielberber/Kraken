@@ -2,7 +2,7 @@
     "info": {
         "project": "Kraken PowerShell Module",
         "author:": "Daniel Berber",
-        "version": "1.0.4"
+        "version": "1.0.5"
     },
     "dbsettings": {
         "server": "<repo db server>",
@@ -80,6 +80,10 @@
         "Get-Volumes": {
             "dest_table": "volumes",
             "query_name": "Get-Volumes.sql"
+        },
+        "Get-TLogSpace": {
+            "dest_table": "tlog_space",
+            "query_name": "Get-TLogSpace.sql"
         }
     }
 }
