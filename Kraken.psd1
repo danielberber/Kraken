@@ -12,7 +12,7 @@
 	PrivateData       = @{
 		PSData = @{
 			Tags       = @('PSInsight', 'REST')
-			ProjectUri = 'https://github.com/dokier/Kraken'
+			ProjectUri = 'https://github.com/danielberber/Kraken'
 		}
 	}
 }
