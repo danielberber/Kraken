@@ -31,12 +31,21 @@ DECLARE @value VARCHAR(64),   @key VARCHAR(512) = 'SYSTEM\CurrentControlSet\Cont
 
 EXEC master..xp_regread  @rootkey = 'HKEY_LOCAL_MACHINE',  @key = @key,  @value_name = 'ActivePowerScheme',  @value = @value OUTPUT;  
 
+--Get Host Name
+DECLARE @hostvalue VARCHAR(64),   @hostkey VARCHAR(512) = 'Software\Microsoft\Virtual Machine\Guest\Parameters'  
+
+EXEC master..xp_regread  @rootkey = 'HKEY_LOCAL_MACHINE',  @hostkey = @hostkey,  @value_name = 'HostName',  @hostvalue = @hostvalue OUTPUT; 
+
+
 SELECT 'powerplan' as setting_name, 'HKLM\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\' as registry_key,  
 'ActivePowerScheme' as  value_name, value_data = CASE @value  WHEN '381b4222-f694-41f0-9685-ff5bb260df2e' THEN 'Balanced'  
 WHEN '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c' THEN 'High Performance'  
 WHEN 'a1841308-3541-4fab-bc81-f71556f20b4a' THEN 'Power Saver'  
 Else @value  
-END  
+END
+UNION
+SELECT 'hyperv_host' as setting_name, 'HKLM\Software\Microsoft\Virtual Machine\Guest\Parameters' as registry_key, 'HostName' as value_name,
+ @hostvalue as value_data
 UNION  SELECT setting_name = CASE   
 WHEN registry_key like '%SQLAgent%' and value_name = 'ObjectName' THEN   'sqlagent_account'   
 WHEN registry_key like '%MSSQL%' and value_name = 'ObjectName' THEN   'sql_account'  

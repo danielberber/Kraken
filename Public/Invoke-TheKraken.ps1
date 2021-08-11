@@ -149,6 +149,7 @@ function Invoke-TheKraken {
                     catch {
                         Write-JobMessage -RunDate $RunDate -RunCount $Using:RunCount -SQLInstance $LocalInstance -JobId $LocalJob.id -StepName $cmdName -Success $False -ExceptionMessage $_.Exception.Message @Using:credSplat
                         Write-Output "$($cmdName) FAILED. Exception: $($_.Exception.Message)"
+                        #Write-Output "$($_.InvocationInfo.ScriptLineNumber)"
                     }                
                 }
             } 

@@ -503,7 +503,7 @@ CREATE TABLE [dbo].[server_properties](
 	[is_xtp_supported] [int] NULL,
 	[is_polybase_installed] [int] NULL,
 	[is_integrated_security_only] [int] NULL,
-	[is_big_data_cluster] [sql_variant] NULL,
+	[is_big_data_cluster] [int] NULL,
 	[filestream_effective_level] [int] NULL,
 	[sql_install_date] [datetime2](7) NULL,
 	[job_id] [int] NOT NULL,
@@ -701,6 +701,52 @@ CREATE TABLE [dbo].[server_principals](
 	[instance_id] [int] NOT NULL,
 	[id] [int] IDENTITY(1,1) NOT NULL,
  CONSTRAINT [PK_server_principals] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[dbcc_checkdb]    Script Date: 7/27/2021 3:56:52 PM ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'dbcc_checkdb')
+BEGIN
+CREATE TABLE [dbo].[dbcc_checkdb](
+	[db_name] [nvarchar](128) NULL,
+	[last_checkdb] [datetime2](7) NULL,
+	[job_id] [int] NOT NULL,
+	[run_date] [datetime2](7) NOT NULL,
+	[run_count] [int] NOT NULL,
+	[instance_id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_dbcc_checkdb] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[os_version]    Script Date: 8/11/2021 4:10:19 PM ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS(SELECT 1 FROM sys.tables WHERE [name] = 'os_version')
+BEGIN
+CREATE TABLE [dbo].[os_version](
+	[host_platform] [nvarchar](256) NULL,
+	[host_distribution] [nvarchar](256) NULL,
+	[host_release] [nvarchar](256) NULL,
+	[os_build] [nvarchar](256) NULL,
+	[job_id] [int] NOT NULL,
+	[run_date] [datetime2](7) NOT NULL,
+	[run_count] [int] NOT NULL,
+	[instance_id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_os_version] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1031,6 +1077,42 @@ CREATE NONCLUSTERED INDEX [IX_server_principals_run_count] ON [dbo].[server_prin
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 END
 
+/****** Object:  Index [IX_dbcc_checkdb_instance_id]    Script Date: 7/27/2021 3:59:44 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_dbcc_checkdb_instance_id')
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_dbcc_checkdb_instance_id] ON [dbo].[dbcc_checkdb]
+(
+	[instance_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+
+/****** Object:  Index [IX_dbcc_checkdb_run_count]    Script Date: 7/27/2021 3:59:51 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_dbcc_checkdb_run_count')
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_dbcc_checkdb_run_count] ON [dbo].[dbcc_checkdb]
+(
+	[run_count] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+
+/****** Object:  Index [IX_os_version_instance_id]    Script Date: 8/11/2021 4:11:58 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_os_version_instance_id')
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_os_version_instance_id] ON [dbo].[os_version]
+(
+	[instance_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+
+/****** Object:  Index [IX_os_version_run_count]    Script Date: 8/11/2021 4:13:07 PM ******/
+IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE [name] = 'IX_os_version_run_count')
+BEGIN
+CREATE NONCLUSTERED INDEX [IX_os_version_run_count] ON [dbo].[os_version]
+(
+	[run_count] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+END
+
 IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_tlog_space')
 BEGIN
 ALTER TABLE [dbo].[tlog_space]  WITH NOCHECK ADD  CONSTRAINT [FK_sql_instances_tlog_space] FOREIGN KEY([instance_id])
@@ -1199,6 +1281,23 @@ ALTER TABLE [dbo].[server_principals]  WITH NOCHECK ADD  CONSTRAINT [FK_sql_inst
 REFERENCES [dbo].[sql_instances] ([id])
 
 ALTER TABLE [dbo].[server_principals] CHECK CONSTRAINT [FK_sql_instances_server_principals]
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_dbcc_checkdb')
+BEGIN
+ALTER TABLE [dbo].[dbcc_checkdb]  WITH NOCHECK ADD  CONSTRAINT [FK_sql_instances_dbcc_checkdb] FOREIGN KEY([instance_id])
+REFERENCES [dbo].[sql_instances] ([id])
+
+ALTER TABLE [dbo].[dbcc_checkdb] CHECK CONSTRAINT [FK_sql_instances_dbcc_checkdb]
+END
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE [name] = 'FK_sql_instances_os_version')
+BEGIN
+ALTER TABLE [dbo].[os_version]  WITH NOCHECK ADD  CONSTRAINT [FK_sql_instances_os_version] FOREIGN KEY([instance_id])
+REFERENCES [dbo].[sql_instances] ([id])
+
+
+ALTER TABLE [dbo].[os_version] CHECK CONSTRAINT [FK_sql_instances_os_version]
 END
 
 IF NOT EXISTS ( SELECT 1 FROM dbo.jobs WHERE job_name = 'Kraken-Main')

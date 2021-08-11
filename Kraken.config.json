@@ -2,7 +2,7 @@
     "info": {
         "project": "Kraken PowerShell Module",
         "author:": "Daniel Berber",
-        "version": "1.0.10"
+        "version": "1.0.13"
     },
     "dbsettings": {
         "server": "<repo db server>",
@@ -88,6 +88,14 @@
         "Get-ServerPrincipals": {
             "dest_table": "server_principals",
             "query_name": "Get-ServerPrincipals.sql"
+        },
+        "Get-LastCheckdb": {
+            "dest_table": "dbcc_checkdb",
+            "query_name": "Get-LastCheckdb.sql"
+        },
+        "Get-OSVersion": {
+            "dest_table": "os_version",
+            "query_name": "Get-OSVersion.sql"
         }
     }
 }
